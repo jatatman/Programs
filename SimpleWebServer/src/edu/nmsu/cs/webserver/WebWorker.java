@@ -60,12 +60,13 @@ public class WebWorker implements Runnable
 			String getFileName = readHTTPRequest(is);
 			File getFile = null;
 
+			// creating a file if a name was passed by readHTTPRequest
 			if (getFileName != null)
 			{
 				getFile = new File(getFileName);
 			}
 
-
+      // making sure file exists
 			if (getFile.exists())
 			{
 				writeHTTPHeader(os, "text/html", "200 OK");
@@ -155,38 +156,44 @@ public class WebWorker implements Runnable
 	 **/
 	private void writeContent(OutputStream os, File getFile) throws Exception
 	{
+		// process html file if it exists
 		if (getFile.exists())
 		{
 			BufferedReader f = new BufferedReader(new FileReader(getFile));
 			String line = f.readLine();
-			line = tagReplacer(line);
 
-			os.write("<html><head></head><body>\n".getBytes());
-			os.write(new String("<h1>localfile:" + getFile.getAbsolutePath() + "</h1>").getBytes());
+			line = tagReplacer(line); // replacing certain tags
 
 			while (line != null)
 			{
-				line = tagReplacer(line);
-				os.write(line.getBytes());
-				line = f.readLine();
+				line = tagReplacer(line); // replacing certain tags
+				os.write(line.getBytes()); // outputting line
+				line = f.readLine(); // getting new line
 
 			}
 		}
 		else
-		{
+		{ // if the file doesn't exist 404 not found
 			os.write("<html><head></head><body>\n".getBytes());
 			os.write("<h1>404 Not Found</h1>\n".getBytes());
 			os.write("</body></html>\n".getBytes());
 		}
 	}
 
+	/**
+	 *Replaces <cs371date>, <cs371server> tags that are found in a line.
+	 *
+	 * @param line - string to be checked for replacements
+	 *
+	 **/
 	private String tagReplacer(String line)
 	{
 		String answer = line;
-
+    // getting the current date time so it can be output
 		Date d = new Date();
 		DateFormat df = DateFormat.getDateTimeInstance();
 
+		// replacing tags
 		answer = answer.replace("<cs371date>", df.format(d));
 		answer = answer.replace("<cs371server>", "Justin's Server");
 		return answer;

@@ -1,12 +1,17 @@
+files are served at
+ 
+localhost:8080/
+example: (localhost:8080/basic.html)
+
 1.
-I think this assignment will take me 2 hours to complete.
+I think this assignment will take me 3 hours to complete.
 
 2.
-* Thought / Design : 1:00
-* Programming      : 1:00
-* Debugging        : 4:00
+* Thought / Design :  :30
+* Programming      : 2:00
+* Debugging        : 2:00
 * ------------------------
-  Total            : 6:00
+  Total            : 4:30
 
 3.x
-My original estimate was only 33% accurate.
+My original estimate was only 67% accurate.

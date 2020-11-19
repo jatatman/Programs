@@ -18,7 +18,7 @@
   <target name="cleanbuild" depends="clean,build"/>
 
   <target name="run" description="launches SimpleWebServer">
-    <java classname="edu.nmsu.cs.webserver.WebServer" classpath="${build}" fork = "true" dir ="${basedir}/www">
+    <java classname="edu.nmsu.cs.webserver.WebServer" classpath="${build}" fork = "true" dir ="${basedir}/src">
       <arg value="8080"/>
     </java>
   </target>

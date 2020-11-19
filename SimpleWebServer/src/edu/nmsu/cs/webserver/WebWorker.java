@@ -179,6 +179,8 @@ public class WebWorker implements Runnable
 	 *
 	 * @param os
 	 *          is the OutputStream object to write to
+	 * @param getFile
+	 *          file to search for
 	 **/
 	private void writeContent(OutputStream os, File getFile) throws Exception
 	{
@@ -193,9 +195,9 @@ public class WebWorker implements Runnable
 
 			while (line != null)
 			{
-				line = tagReplacer(line); // replacing certain tags
-				os.write(line.getBytes()); // outputting line
-				line = f.readLine(); // getting new line
+				line = tagReplacer(line); 
+				os.write(line.getBytes()); 
+				line = f.readLine(); 
 			}
 
 		}
@@ -207,7 +209,13 @@ public class WebWorker implements Runnable
 		}
 	}
 
-
+      /**
+       * Writes an image to the webpage. Works for jpg/jpeg, gif, and png.
+       * @param os
+       *          is the OutputStream object to write to
+       * @param getFile
+       *          file to search for
+       */
 		private void writeImage(OutputStream os, File getFile)
 		{
 			BufferedInputStream bis;
@@ -232,9 +240,9 @@ public class WebWorker implements Runnable
 				line = 0;
 				e.printStackTrace();
 			}
+			
 			while (line != -1)
 			{
-
 				try
 				{
 					os.write(line);
@@ -256,11 +264,9 @@ public class WebWorker implements Runnable
 	private String tagReplacer(String line)
 	{
 		String answer = line;
-    // getting the current date time so it can be output
 		Date d = new Date();
 		DateFormat df = DateFormat.getDateTimeInstance();
 
-		// replacing tags
 		answer = answer.replace("<cs371date>", df.format(d));
 		answer = answer.replace("<cs371server>", "Justin's Server");
 		return answer;
